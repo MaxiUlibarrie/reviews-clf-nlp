@@ -12,13 +12,14 @@ from useful import Config
 
 PATH_MODELS = "/usr/src/models"
 
-class Review(BaseModel):
-    text: Optional[constr(max_length=200)]
+class ReviewPL(BaseModel):
+    review: Optional[constr(max_length=200)]
 
 class Reviews_clf():
 
     def __init__(self):
-        print("### Loading Model ###")
+        print("### LOADING MODEL ###")
+
         all_models = glob(PATH_MODELS + "/review-clf-v*.pth")
         last_model = sorted(all_models)[-1]
         self.clf = torch.load(last_model)
@@ -34,6 +35,8 @@ class Reviews_clf():
             0: 'NEGATIVO', 
             1: 'POSITIVO'
         }
+        
+        print("### MODEL LOADED SUCCESSFULLY ###")
 
     def __transform_input(self, review):
         text = str(review)
