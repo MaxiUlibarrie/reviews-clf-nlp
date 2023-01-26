@@ -1,0 +1,5 @@
+# due to large size of models
+*.pth
+models/weights/
+.ipynb_checkpoints/
+__pycache__/

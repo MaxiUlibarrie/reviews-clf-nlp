@@ -1,0 +1,30 @@
+FROM bitnami/pytorch:1.13.1-debian-11-r13
+
+WORKDIR /usr/src
+
+USER root
+
+RUN mkdir -p /usr/src/cache-trans
+ENV TRANSFORMERS_CACHE=/usr/src/cache-trans/
+
+RUN mkdir -p /usr/src/models
+RUN mkdir -p /usr/src/models/weights
+
+# config 
+COPY ./common/config.json /usr/src/config.json
+COPY ./common/code/useful.py /usr/src/code/useful.py
+
+# data 
+COPY ./data/train.csv /usr/src/data/train.csv
+
+# model
+COPY ./common/code/data_manager.py /usr/src/code/data_manager.py
+COPY ./common/code/model_arq.py /usr/src/code/model_arq.py
+COPY ./train/code/reviews_clf_train.py /usr/src/code/reviews_clf_train.py
+
+# requirements
+COPY ./train/requeriments.txt /usr/src/requeriments.txt
+
+RUN pip install -r /usr/src/requeriments.txt
+
+ENTRYPOINT ["python","code/reviews_clf_train.py"]

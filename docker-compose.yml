@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  train:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    volumes:
+      - ./models:/usr/src/models
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - 8000:8000

@@ -1,0 +1,24 @@
+FROM bitnami/pytorch:1.13.1-debian-11-r13
+
+USER root
+
+WORKDIR /usr/src
+
+RUN mkdir -p /usr/src/cache-trans
+ENV TRANSFORMERS_CACHE=/usr/src/cache-trans/
+
+# config 
+COPY ./common/config.json /usr/src/config.json
+COPY ./common/code/useful.py /usr/src/useful.py
+
+# model
+COPY ./backend/code /usr/src
+COPY ./common/code/model_arq.py /usr/src/model_arq.py
+COPY ./models /usr/src/models
+
+# requirements
+COPY ./backend/requeriments.txt /usr/src/requeriments.txt
+
+RUN pip install -r /usr/src/requeriments.txt
+
+CMD ["uvicorn","reviews_clf_services:app","--host","0.0.0.0","--port","8000"]
