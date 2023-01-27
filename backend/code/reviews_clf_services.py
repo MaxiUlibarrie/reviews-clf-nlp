@@ -14,8 +14,8 @@ def health_check():
 
 @app.get('/classify-review')
 def classify_review(reviewpl: ReviewPL):
-    review_type = review_clf.classify_review(reviewpl.review)
     try: 
+        review_type = review_clf.classify_review(reviewpl.review)
         return {"result" : review_type}
     except Exception as e:
         print(e)

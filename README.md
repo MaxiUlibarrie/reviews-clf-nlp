@@ -1,12 +1,12 @@
 # Reviews Classifier
-This is a project to identify a movie review as positive or negative.
+This is a project to identify a movie review in spanish as positive or negative.
 
 ### Require:
 * Docker
 * Docker Compose
 
 ### CI/CD:
-There are two principals processes for this project (both managed using Docker Compose):
+There are two principal processes for this project (both managed using Docker Compose):
 * TRAINING
 * BACKEND
 
@@ -25,13 +25,16 @@ There are two principals processes for this project (both managed using Docker C
 * **--epochs**: number of epochs
 
 #### Not Require:
-* **--n-classes**: number of classes (default: 9)
-* **--max-length-tokens**: Max length of the tokens to be used (default: 250)
+* **--n-classes**: number of classes (default: 2)
+* **--max-length-tokens**: Max length of the tokens to be used (default: 300)
 * **--batch-size**: batch size for training (default: 16)
 * **--random-seed**: random seed for to start training (default: 42)
 
-
+Example:
 > `docker-compose run train --version-model 1 --epochs 5`
+
+### Config file
+Also in the configuration file it is posible to change these default values (`common/config.json`)
 
 # BACKEND
 
