@@ -18,3 +18,4 @@ class Config():
         self.n_classes = int(config["model"]["n-classes"])
 
         print("### Config loaded ###")
+        
