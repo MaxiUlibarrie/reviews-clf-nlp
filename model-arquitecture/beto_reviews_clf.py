@@ -1,25 +1,17 @@
 from transformers import BertModel, BertTokenizer
-import torch
 from torch import nn
-from torch.utils.data import Dataset, DataLoader
 
 # https://huggingface.co/dccuchile/bert-base-spanish-wwm-cased
 # PRE_TRAINED_MODEL_NAME = 'bert-base-cased'
 PRE_TRAINED_MODEL_NAME = 'dccuchile/bert-base-spanish-wwm-cased'
 
-# tokenizer
+def beto_tokenizer():
+    return BertTokenizer.from_pretrained(PRE_TRAINED_MODEL_NAME)
 
-def get_tokenizer():
-    print("### Getting Tokenizer ###")
-    tokenizer = BertTokenizer.from_pretrained(PRE_TRAINED_MODEL_NAME)
-    return tokenizer
-
-# MODEL!
-
-class BETOReviewsClassifier(nn.Module):
+class BETOReviewsClfModel(nn.Module):
 
     def __init__(self, n_classes):
-        super(BETOReviewsClassifier, self).__init__()
+        super(BETOReviewsClfModel, self).__init__()
         self.bert = BertModel.from_pretrained(PRE_TRAINED_MODEL_NAME)
         self.drop = nn.Dropout(p=0.3)
         self.relu = nn.ReLU()
@@ -31,7 +23,7 @@ class BETOReviewsClassifier(nn.Module):
             input_ids = input_ids,
             attention_mask = attention_mask
         )
-        cls_output = bert_output[1] # passing the pooler_output/token classification
+        cls_output = bert_output[1] 
         t = self.drop(cls_output)
         t = self.relu(t)
         t = self.fc(t)

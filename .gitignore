@@ -3,3 +3,16 @@
 models/weights/
 .ipynb_checkpoints/
 __pycache__/
+
+# notebooks cache
+.ipynb_checkpoints/
+__pycache__/
+
+# pth models
+*.pth
+
+# csv files
+*.csv
+
+# weights
+models/news/weights/*
