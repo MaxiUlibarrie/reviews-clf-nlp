@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-import uvicorn
 from models import ReviewPL, Reviews_clf
 
 # Loading Model

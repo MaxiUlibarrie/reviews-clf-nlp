@@ -1,9 +1,9 @@
 {
     "model": {
-        "batch-size": 16,
-        "max-length-tokens": 300,
-        "random-seed": 42,
-        "n-classes": 2,
+        "batch_size": 16,
+        "max_length_tokens": 300,
+        "random_seed": 42,
+        "n_classes": 2,
         "epochs": 5
     }
 }

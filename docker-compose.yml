@@ -5,10 +5,13 @@ services:
       context: .
       dockerfile: Dockerfile.train
     volumes:
-      - ./models:/usr/src/models
+      - ./models/news:/usr/src/models
+      - ./pipelines/train/data:/usr/src/train-data
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
+    volumes:
+      - ./models/deploy:/usr/src/model
     ports:
       - 8000:8000
